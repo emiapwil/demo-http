@@ -9,8 +9,19 @@ app = Flask("demo-http-server")
 CHUNK_SIZE = 65536
 CHUNK = 'a' * CHUNK_SIZE
 
-@app.route('/demo/<size>')
-def supply(size):
+MIME_MAPPING = {
+            "mp4": "video/mp4",
+            "mkv": "video/divx",
+            "avi": "video/divx",
+            "zip": "application/x-zip-compressed",
+            "iso": "application/octetstream",
+            "txt": "text/txt",
+            "html": "text/html"
+        }
+
+@app.route('/demo/<size>', defaults={'prefix': 'html'})
+@app.route('/demo/<size>.<prefix>')
+def supply(size, prefix):
     def generate(size):
         size = int(size)
         rnd = int(size / CHUNK_SIZE)
@@ -20,10 +31,9 @@ def supply(size):
         yield 'a' * (size - rnd * CHUNK_SIZE)
         print('percentage: {:.2%}'.format(1))
 
-    response = Response(generate(size), mimetype='text/txt')
+    response = Response(generate(size), mimetype=MIME_MAPPING[prefix])
     response.headers['content-length'] = size
     return response
-
 
 if __name__ == '__main__':
     host = '127.0.0.1' if len(sys.argv) < 2 else sys.argv[1]
