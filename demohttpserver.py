@@ -19,9 +19,9 @@ MIME_MAPPING = {
             "html": "text/html"
         }
 
-@app.route('/demo/<size>', defaults={'prefix': 'html'})
-@app.route('/demo/<size>.<prefix>')
-def supply(size, prefix):
+@app.route('/demo/<size>', defaults={'suffix': 'html'})
+@app.route('/demo/<size>.<suffix>')
+def supply(size, suffix):
     def generate(size):
         size = int(size)
         rnd = int(size / CHUNK_SIZE)
@@ -31,7 +31,7 @@ def supply(size, prefix):
         yield 'a' * (size - rnd * CHUNK_SIZE)
         print('percentage: {:.2%}'.format(1))
 
-    response = Response(generate(size), mimetype=MIME_MAPPING[prefix])
+    response = Response(generate(size), mimetype=MIME_MAPPING[suffix])
     response.headers['content-length'] = size
     return response
 

@@ -9,7 +9,9 @@ apt-get -y install python3 python3-pip
 
 apt-get -y install tmux
 
-pip3 install pycurl
+pip3 install pycurl flask
+
+WORKDIR=$(pwd)
 
 # Install bro
 
@@ -26,8 +28,6 @@ apt-get update
 apt-get -y install bro
 
 # Install demo applications
-
-WORKDIR=$(pwd)
 
 git clone https://github.com/emiapwil/demo-http tutorial-sc16
 make -C tutorial-sc16
