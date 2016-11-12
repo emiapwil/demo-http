@@ -1,4 +1,11 @@
-# Byte-compiled / optimized / DLL files
+# temp
+*.swp
+
+## C binaries
+*.o
+democlient
+
+## Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
