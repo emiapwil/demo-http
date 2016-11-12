@@ -1,0 +1,7 @@
+#!/bin/sh
+
+WORK_DIR="$(dirname $(which $0))"
+
+echo $WORK_DIR
+
+python3 "$WORK_DIR/demohttpserver.py" $*

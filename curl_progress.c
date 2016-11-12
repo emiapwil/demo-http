@@ -15,8 +15,8 @@ struct task_progress {
 };
 
 static int report_progress(void *p,
-	                   curl_off_t _d, curl_off_t downloaded,
-	                   curl_off_t _u, curl_off_t uploaded) {
+	 curl_off_t _d, curl_off_t downloaded,
+	 curl_off_t _u, curl_off_t uploaded) {
 	struct task_progress *progress = (struct task_progress *)p;
 	CURL *curl = progress->curl;
 
@@ -40,7 +40,7 @@ static int report_progress(void *p,
 	progress->uploaded = uploaded;
 
 	fprintf(stderr, "%.2f %.2f %.2f\r\n", current * MICROSECOND_TO_SECOND,
-					      download_speed, upload_speed);
+					download_speed, upload_speed);
 
 	return 0;
 }
@@ -66,13 +66,13 @@ int main(int argc, char** argv) {
 		curl_easy_setopt(curl, CURLOPT_URL, argv[1]);
 
 		curl_easy_setopt(curl, CURLOPT_XFERINFOFUNCTION, report_progress);
-	  	curl_easy_setopt(curl, CURLOPT_XFERINFODATA, &progress);
+		curl_easy_setopt(curl, CURLOPT_XFERINFODATA, &progress);
 
 		curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 0L);
 
 		error = curl_easy_perform(curl);
 
-	  	if (error != CURLE_OK) {
+		if (error != CURLE_OK) {
 			fprintf(stderr, "%s\n", curl_easy_strerror(error));
 		}
 
