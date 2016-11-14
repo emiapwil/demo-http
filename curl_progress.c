@@ -93,7 +93,7 @@ int main(int argc, char** argv) {
 		error = curl_easy_perform(curl);
 
 		if (error != CURLE_OK) {
-			fprintf(stderr, "%s\n", curl_easy_strerror(error));
+			fprintf(stderr, "# %s\n", curl_easy_strerror(error));
 		} else {
 			double diff = (GRACEFUL_PERIOD * 1.0) / MICROSECOND_TO_SECOND;
 			update_progress(&progress, progress.timestamp + diff,

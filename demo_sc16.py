@@ -74,14 +74,17 @@ def demo_sc16(controller_ip):
     r1.cmd('export PATH=$PATH:/home/mininet/tutorial-sc16')
     r2.cmd('export PATH=$PATH:/home/mininet/tutorial-sc16')
 
-    r1.cmd('demoserver 10.0.2.2 80 &>sci.log &')
-    r2.cmd('demoserver 10.0.2.3 80 &>cas.log &')
+    os.system('/home/mininet/bro_http/start_bro.sh firewall-eth1 127.0.0.1')
+
+    r1.cmd('demoserver 10.0.2.2 80 1>sci.log 2>/dev/null &')
+    r2.cmd('demoserver 10.0.2.3 80 1>cas.log 2>/dev/null &')
 
     net.start()
     CLI(net)
     net.stop()
 
     os.system('pkill gunicorn')
+    os.system('pkill bro')
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:

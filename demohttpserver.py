@@ -28,10 +28,10 @@ def supply(size, suffix):
         size = int(size)
         rnd = int(size / CHUNK_SIZE)
         for i in range(rnd):
-            print('percentage: {:.2%}'.format(i * CHUNK_SIZE / size))
+            print('percentage: {:.2%}'.format(i * CHUNK_SIZE / size), file=sys.stderr)
             yield CHUNK
         yield CHUNK[rnd * CHUNK_SIZE - size:]
-        print('percentage: {:.2%}'.format(1))
+        print('percentage: {:.2%}'.format(1), file=sys.stderr)
 
     headers = {}
     headers['content-length'] = size
