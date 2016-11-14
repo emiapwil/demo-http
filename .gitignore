@@ -1,5 +1,7 @@
 # temp
+*.pid
 *.swp
+*.log
 
 ## C binaries
 *.o

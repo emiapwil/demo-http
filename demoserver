@@ -2,6 +2,9 @@
 
 WORK_DIR="$(dirname $(which $0))"
 
-echo $WORK_DIR
+CUR_DIR="$(pwd)"
 
-python3 "$WORK_DIR/demohttpserver.py" $*
+export PYTHONPATH=$PYTHONPATH:$WORK_DIR
+
+gunicorn -w 2 -b $1:$2 demohttpserver:app
+
